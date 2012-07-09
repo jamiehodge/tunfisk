@@ -25,4 +25,40 @@ describe User do
     
   end
   
+  describe 'authentication' do
+    
+    it 'wont authenticate with invalid credentials' do
+      User.authenticate(ENV['LDAP_UID'], 'invalid').must_equal nil
+    end
+    
+    it 'must authenticate with valid credentials' do
+      User.authenticate(ENV['LDAP_UID'], ENV['LDAP_PASSWORD']).must_be_kind_of User
+    end
+    
+  end
+  
+  describe 'entry' do
+    
+    it 'must return user displayname' do
+      user.entry.displayname.must_include 'Jamie Milan Hodge'
+    end
+    
+    it 'must return user title' do
+      user.entry.title.must_include 'Akademisk medarbejder, Medieproducer'
+    end
+    
+    it 'must return user departmentnumber' do
+      user.entry.departmentnumber.must_include 'FLI; Itmedia'
+    end
+    
+    it 'must return user mail' do
+      user.entry.mail.must_include 'jamieh@hum.ku.dk'
+    end
+    
+    it 'must return user employeetype' do
+      user.entry.employeetype.must_include 'hum-fak'
+    end
+    
+  end
+  
 end

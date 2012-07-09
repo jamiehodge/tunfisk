@@ -1,3 +1,3 @@
 Fabricator :user do
-  username  ENV['LDAP_USERNAME']
+  username  ENV['LDAP_UID']
 end

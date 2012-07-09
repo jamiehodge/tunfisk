@@ -7,4 +7,18 @@ class User < Sequel::Model
     validates_format   /^[a-z]{3}\d{3}$/, :username
   end
   
+  def self.authenticate username, password
+    new(username: username) if ldap.authenticate username, password
+  end
+  
+  def entry
+    @entry ||= LDAP.first LDAP.filter(:uid, username)
+  end
+  
+  private
+  
+  def self.ldap
+    LDAP
+  end
+  
 end
