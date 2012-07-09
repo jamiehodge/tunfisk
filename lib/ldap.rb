@@ -10,7 +10,7 @@ module LDAP
   end
   
   def search filter, &block
-    ldap.search base: base, filter: filter, &block
+    Array(ldap.search base: base, filter: filter, &block)
   end
     
   def ldap

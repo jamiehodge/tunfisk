@@ -23,7 +23,7 @@ describe LDAP do
       end
     
       it 'must return existant entry' do
-        LDAP.first(LDAP.filter(:uid, ENV['LDAP_UID'])).must_be_kind_of Net::LDAP::Entry
+        LDAP.search(LDAP.filter(:uid, ENV['LDAP_UID'])).first.must_be_kind_of Net::LDAP::Entry
       end
       
     end
@@ -35,7 +35,7 @@ describe LDAP do
       end
       
       it 'must return existant entry' do
-        LDAP.first(LDAP.filter(:mail, ENV['LDAP_EMAIL'])).must_be_kind_of Net::LDAP::Entry
+        LDAP.search(LDAP.filter(:mail, ENV['LDAP_EMAIL'])).first.must_be_kind_of Net::LDAP::Entry
       end
     end
   
