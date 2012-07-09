@@ -6,6 +6,8 @@ Sequel.migration do
       String  :username
       
       check { :username.like(/^[a-z]{3}\d{3}$/) }
+      
+      unique :username
     end
   end
 end
