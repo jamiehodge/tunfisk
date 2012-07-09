@@ -8,17 +8,11 @@ class User < Sequel::Model
   end
   
   def self.authenticate username, password
-    new(username: username) if ldap.authenticate username, password
+    new(username: username) if LDAP.authenticate username, password
   end
   
   def entry
     @entry ||= LDAP.first LDAP.filter(:uid, username)
-  end
-  
-  private
-  
-  def self.ldap
-    LDAP
   end
   
 end
