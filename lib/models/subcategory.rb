@@ -11,4 +11,5 @@ class Subcategory < Sequel::Model
     validates_not_string :code
     validates_length_range 1..255, :name
   end
+  
 end
