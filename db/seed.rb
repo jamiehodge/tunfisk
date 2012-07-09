@@ -2,6 +2,12 @@
 
 DB.transaction do
   
+  [
+    'Copenhagen University'
+  ].each do |name|
+    DB[:institutions].insert name: name
+  end
+  
   # Top-level
   {
     '100' => 'Business',
