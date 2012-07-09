@@ -414,4 +414,16 @@ DB.transaction do
     DB[:languages].insert name: name, code: code
   end
   
+  {
+    'CC BY'       => 'Attribution',
+    'CC BY-ND'    => 'Attribution-NoDerivs',
+    'CC BY-NC-SA' => 'Attribution-NonCommercial-ShareAlike',
+    'CC BY-SA'    => 'Attribution-ShareAlike',
+    'CC BY-NC'    => 'Attribution-NonCommercial',
+    'CC BY-NC-ND' => 'Attribution-NonCommercial-NoDerivs',
+    'All Rights Reserved' => 'All Rights Reserved'
+  }.each do |code, name|
+    DB[:licenses].insert code: code, name: name
+  end
+  
 end
