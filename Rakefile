@@ -6,6 +6,11 @@ namespace :db do
     DB = Sequel.connect ENV['DATABASE_URL']
   end
   
+  desc 'Seed database'
+  task seed: :environment do
+    require_relative 'db/seed'
+  end
+  
   namespace :migrate do
     
     desc 'Environment'
