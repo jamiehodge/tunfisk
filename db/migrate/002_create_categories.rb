@@ -5,6 +5,8 @@ Sequel.migration do
       
       Integer :code, null: false, unique: true
       String  :name, null: false
+      
+      check { char_length(name) > 0 }
     end
     
     create_table :subcategories do
@@ -14,6 +16,8 @@ Sequel.migration do
       
       Integer :code, null: false
       String  :name, null: false
+      
+      check { char_length(name) > 0 }
       
       unique [:category_id, :code]
     end
