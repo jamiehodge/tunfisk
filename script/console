@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+foreman run irb -r./env
