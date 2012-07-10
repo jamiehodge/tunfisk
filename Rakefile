@@ -3,7 +3,7 @@ namespace :db do
   desc 'Environment'
   task :environment do
     require 'sequel'
-    DB = Sequel.connect ENV['DATABASE_URL']
+    DB = Sequel.connect "#{ENV['DATABASE_URL']}-#{ENV['RACK_ENV']}"
   end
   
   desc 'Seed database'
