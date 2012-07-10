@@ -32,6 +32,10 @@ describe Asset do
         asset.type = ''
         asset.wont_be :valid?
       end
+      
+      it 'wont accept invalid format' do
+        asset.type = (0...8).map{65.+(rand(25)).chr}.join.gsub('/', '')
+      end
 
     end
     
@@ -54,6 +58,14 @@ describe Asset do
       
     end
     
+  end
+  
+  describe 'associations' do
+    
+    it 'wont accept blank item id' do
+      asset.item_id = ''
+      asset.wont_be :valid?
+    end
   end
   
   describe 'full_text_search' do
