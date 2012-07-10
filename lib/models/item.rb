@@ -9,6 +9,8 @@ class Item < Sequel::Model
   many_to_many :keywords
   many_to_many :authors, class: User, right_key: :user_id
   
+  one_to_one :asset
+  
   plugin :optimistic_locking
   
   def validate
