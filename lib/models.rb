@@ -9,6 +9,9 @@ require_relative 'models/collection'
 require_relative 'models/item'
 require_relative 'models/asset'
 require_relative 'models/proxy'
+require_relative 'models/status'
+require_relative 'models/approval'
+
 
 
 
