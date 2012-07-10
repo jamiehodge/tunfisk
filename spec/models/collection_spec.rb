@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe Collection do
   
   let :collection do
-    Fabricate.build :collection
+    Fabricate :collection
   end
   
   describe 'validation' do
@@ -68,7 +68,7 @@ describe Collection do
   describe 'full_text_search' do
     
     before do
-      collection.save
+      collection
     end
     
     describe 'blank' do
@@ -82,7 +82,7 @@ describe Collection do
     describe 'single word' do
       
       it 'must return matching record' do
-        Collection.text_search('col').count.must_equal 1
+        Collection.text_search('exa').count.must_equal 1
       end
       
       it 'wont return non-matching record' do
@@ -94,7 +94,7 @@ describe Collection do
     describe 'multiple words' do
       
       it 'must return matching record' do
-        Collection.text_search('int tes').count.must_equal 1
+        Collection.text_search('pos tes').count.must_equal 1
       end
       
       it 'wont return non-matching record' do
