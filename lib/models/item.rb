@@ -4,9 +4,12 @@ class Item < Sequel::Model
   many_to_one :category
   many_to_one :subcategory
   
-  plugin :optimistic_locking
+  plugin :association_pks
   
+  many_to_many :keywords
   many_to_many :authors, class: User, right_key: :user_id
+  
+  plugin :optimistic_locking
   
   def validate
     super

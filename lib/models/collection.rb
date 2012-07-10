@@ -4,8 +4,9 @@ class Collection < Sequel::Model
   many_to_one :language
   many_to_one :license
   
-  # plugin :association_pks
-  # many_to_many :keywords
+  plugin :association_pks
+  
+  many_to_many :keywords
   
   plugin :instance_hooks
   plugin :optimistic_locking
