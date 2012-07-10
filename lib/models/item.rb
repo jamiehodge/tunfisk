@@ -6,6 +6,8 @@ class Item < Sequel::Model
   
   plugin :optimistic_locking
   
+  many_to_many :authors, class: User, right_key: :user_id
+  
   def validate
     super
     validates_presence [:collection_id, :category_id, :subcategory_id, :title, :description, :explicit]
