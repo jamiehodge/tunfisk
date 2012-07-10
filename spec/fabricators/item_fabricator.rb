@@ -1,8 +1,9 @@
 Fabricator :item do
-  title       'Example Item'
-  description 'For testing purposes'
-  explicit    false
+  title       { Faker::Lorem.sentence }
+  description { Faker::Lorem.paragraph }
+  explicit    { [true, false].sample }
   collection
-  category    Category.first
-  subcategory Category.first.subcategories.first
+  category
+  subcategory
+  institution
 end

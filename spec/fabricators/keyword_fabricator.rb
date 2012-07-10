@@ -1,3 +1,3 @@
 Fabricator :keyword do
-  name  'foo'
+  name  { Faker::Lorem.words(1).first }
 end

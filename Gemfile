@@ -17,4 +17,5 @@ group :test do
   gem 'minitest', '>= 3.2.0'
   gem 'rack-test'
   gem 'fabrication'
+  gem 'faker'
 end

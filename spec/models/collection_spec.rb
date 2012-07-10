@@ -71,6 +71,10 @@ describe Collection do
       collection
     end
     
+    def text
+      [collection.title, collection.description, collection.department].collect(&:split).flatten.sample
+    end
+    
     describe 'blank' do
       
       it 'must return all records' do
@@ -82,11 +86,11 @@ describe Collection do
     describe 'single word' do
       
       it 'must return matching record' do
-        Collection.text_search('exa').count.must_equal 1
+        Collection.text_search(text).count.must_equal 1
       end
       
       it 'wont return non-matching record' do
-        Collection.text_search('fr').count.must_equal 0
+        Collection.text_search('xyzzy').count.must_equal 0
       end
       
     end
@@ -94,11 +98,11 @@ describe Collection do
     describe 'multiple words' do
       
       it 'must return matching record' do
-        Collection.text_search('pos tes').count.must_equal 1
+        Collection.text_search([text, text].join(' ')).count.must_equal 1
       end
       
       it 'wont return non-matching record' do
-        Collection.text_search('fl fr').count.must_equal 0
+        Collection.text_search('xy zz y').count.must_equal 0
       end
     
     end

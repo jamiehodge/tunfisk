@@ -1,8 +1,8 @@
 Fabricator :collection do
-  title       'Example collection'
-  description 'For the testing purposes only'
-  department  'Internal'
-  institution Institution.first
-  language    Language.first
-  license     License.first
+  title       { Faker::Lorem.sentence }
+  description { Faker::Lorem.paragraph }
+  department  { Faker::Lorem.sentence }
+  institution
+  language
+  license
 end

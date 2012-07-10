@@ -66,6 +66,10 @@ describe Item do
       item
     end
     
+    def text
+      [item.title, item.description].collect(&:split).flatten.sample
+    end
+    
     describe 'blank' do
       
       it 'must return all records' do
@@ -77,11 +81,11 @@ describe Item do
     describe 'single word' do
       
       it 'must return matching record' do
-        Item.text_search('exa').count.must_equal 1
+        Item.text_search(text).count.must_equal 1
       end
       
       it 'wont return non-matching record' do
-        Item.text_search('fr').count.must_equal 0
+        Item.text_search('xyzzy').count.must_equal 0
       end
       
     end
@@ -89,11 +93,11 @@ describe Item do
     describe 'multiple words' do
       
       it 'must return matching record' do
-        Item.text_search('int tes').count.must_equal 1
+        Item.text_search([text, text].join(' ')).count.must_equal 1
       end
       
       it 'wont return non-matching record' do
-        Item.text_search('fl fr').count.must_equal 0
+        Item.text_search('xy zz y').count.must_equal 0
       end
     
     end
