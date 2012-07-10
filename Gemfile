@@ -18,4 +18,5 @@ group :test do
   gem 'rack-test'
   gem 'fabrication'
   gem 'faker'
+  gem 'mime-types'
 end
