@@ -7,7 +7,7 @@ class Item < Sequel::Model
   plugin :association_pks
   
   many_to_many :keywords
-  many_to_many :authors, class: User, right_key: :user_id
+  many_to_many :authors, class: User
   
   one_to_one :asset
   
