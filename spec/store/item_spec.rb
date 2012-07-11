@@ -57,12 +57,17 @@ describe Store::Item do
       
       it 'appends data to a given item' do
         item << file_contents
-        File.open("#{item_path}/#{filename}") {|f| f.read.must_equal file_contents }
+        File.open(item.path) {|f| f.read.must_equal file_contents }
       end
       
     end
     
     describe 'read' do
+      
+      it 'returns the contents of a given item' do
+        item << file_contents
+        item.read.must_equal file_contents
+      end
       
     end
     
