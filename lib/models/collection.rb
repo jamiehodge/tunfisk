@@ -7,6 +7,7 @@ class Collection < Sequel::Model
   plugin :association_pks
   
   many_to_many :keywords
+  many_to_many :links
   
   plugin :instance_hooks
   plugin :optimistic_locking
