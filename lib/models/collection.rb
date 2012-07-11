@@ -5,9 +5,10 @@ class Collection < Sequel::Model
   many_to_one :license
   
   plugin :association_pks
+  plugin :touch
   
-  many_to_many :keywords
-  many_to_many :links
+  many_to_many :keywords, after_add: :touch_timestamp, after_remove: :touch_timestamp
+  many_to_many :links, after_add: :touch_timestamp, after_remove: :touch_timestamp
   
   plugin :instance_hooks
   plugin :optimistic_locking
@@ -24,4 +25,7 @@ class Collection < Sequel::Model
     full_text_search([:title, :description, :department], query.split.map {|q| "#{q}:*"})
   end
   
+  def touch_timestamp
+    touch
+  end
 end

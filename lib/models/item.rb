@@ -5,9 +5,10 @@ class Item < Sequel::Model
   many_to_one :subcategory
   
   plugin :association_pks
+  plugin :touch
   
-  many_to_many :keywords
-  many_to_many :authors, class: User
+  many_to_many :keywords, after_add: :touch_timestamp, after_remove: :touch_timestamp
+  many_to_many :authors, class: User, after_add: :touch_timestamp, after_remove: :touch_timestamp
   
   one_to_one :asset
   
@@ -23,5 +24,9 @@ class Item < Sequel::Model
   def_dataset_method(:text_search) do |query|
     return self if query.blank?
     full_text_search([:title,:description], query.split.map {|q| "#{q}:*"})
+  end
+  
+  def touch_timestamp
+    touch
   end
 end
