@@ -4,7 +4,6 @@ describe Store::Bin do
   
   before do
     FakeFS.activate!
-    FakeFS::FakeFile.extend Store::Lockable
   end
   
   after do
