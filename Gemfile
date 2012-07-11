@@ -18,5 +18,6 @@ group :test do
   gem 'rack-test'
   gem 'fabrication'
   gem 'faker'
+  gem 'fakefs', require: 'fakefs/safe'
   gem 'mime-types'
 end
