@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe Keyword do
   
   let :keyword do
-    Fabricate.build :keyword
+    Fabricate :keyword
   end
   
   describe 'validation' do
@@ -27,7 +27,11 @@ describe Keyword do
   describe 'full_text_search' do
     
     before do
-      keyword.save
+      keyword
+    end
+    
+    def text
+      keyword.name.split.sample
     end
     
     describe 'blank' do
@@ -41,11 +45,11 @@ describe Keyword do
     describe 'single word' do
       
       it 'must return matching record' do
-        Keyword.text_search('fo').count.must_equal 1
+        Keyword.text_search(text).count.must_equal 1
       end
       
       it 'wont return non-matching record' do
-        Keyword.text_search('fr').count.must_equal 0
+        Keyword.text_search('xyzzy').count.must_equal 0
       end
       
     end
@@ -53,11 +57,11 @@ describe Keyword do
     describe 'multiple words' do
       
       it 'must return matching record' do
-        Keyword.text_search('f fo').count.must_equal 1
+        Keyword.text_search([text, text].join(' ')).count.must_equal 1
       end
       
       it 'wont return non-matching record' do
-        Keyword.text_search('fl fr').count.must_equal 0
+        Keyword.text_search('xy zz y').count.must_equal 0
       end
     
     end
