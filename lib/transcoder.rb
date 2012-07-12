@@ -20,7 +20,6 @@ class Transcoder
   
   def transcode format
     Tempfile.open(['transcode', ".#{format}"]) do |output|
-      
       @movie.transcode(output.path, options, self.class.formats[format]) do |progress|
         yield progress, output if block_given?
       end
