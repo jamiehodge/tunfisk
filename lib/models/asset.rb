@@ -2,6 +2,8 @@ class Asset < Sequel::Model
   
   many_to_one :item
   
+  one_to_many :proxies
+  
   def validate
     super
     validates_presence [:item_id, :name, :type, :size]
