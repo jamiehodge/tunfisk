@@ -432,4 +432,8 @@ DB.transaction do
     DB[:licenses].insert code: code, name: name
   end
   
+  %w{pending accepted rejected}.each do |name|
+    DB[:statuses].insert name: name
+  end
+  
 end
