@@ -3,8 +3,8 @@ module Store
     
     attr_reader :filename
     
-    def self.create parent, file
-      new parent, File.basename(file) if FileUtils.cp file, File.join(parent.path, File.basename(file))
+    def self.create parent, path
+      new parent, File.basename(path) if FileUtils.cp path, File.join(parent.path, File.basename(path))
     end
     
     def initialize parent, filename
