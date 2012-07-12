@@ -3,7 +3,7 @@ Sequel.migration do
     create_table :approvals do
       primary_key :id
         
-      foreign_key :item_id, :items, null: false, on_delete: :cascade, index: true
+      foreign_key :asset_id, :assets, null: false, on_delete: :cascade, index: true
       foreign_key :reviewer_id, :users, null: false, on_delete: :cascade, index: true
       foreign_key :status_id, :statuses, null: false, index: true
       
@@ -16,7 +16,7 @@ Sequel.migration do
       
       full_text_index :comment
       
-      unique [:item_id, :reviewer_id]
+      unique [:asset_id, :reviewer_id]
     end
     
     pgt_created_at :approvals, :created_at

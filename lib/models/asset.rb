@@ -3,6 +3,7 @@ class Asset < Sequel::Model
   many_to_one :item
   
   one_to_many :proxies
+  one_to_many :approvals
   
   def validate
     super
@@ -17,5 +18,5 @@ class Asset < Sequel::Model
     return self if query.blank?
     full_text_search([:name], query.split.map {|q| "#{q}:*"})
   end
-  
+
 end

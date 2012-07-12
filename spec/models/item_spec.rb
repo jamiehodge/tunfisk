@@ -57,7 +57,7 @@ describe Item do
       end
       
     end
-
+    
   end
   
   describe 'full_text_search' do

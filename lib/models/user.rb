@@ -1,4 +1,6 @@
 class User < Sequel::Model
+  
+  one_to_many :approvals, key: :reviewer_id
 
   def validate
     super

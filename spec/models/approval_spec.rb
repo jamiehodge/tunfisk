@@ -15,7 +15,7 @@ describe Approval do
     describe 'associations' do
       
       it 'wont accept blank item id' do
-        approval.item_id = ''
+        approval.asset_id = ''
         approval.wont_be :valid?
       end
       
