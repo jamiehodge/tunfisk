@@ -1,9 +1,18 @@
+require 'queue_classic/tasks'
+
+namespace :qc do
+  desc 'Environment'
+  task :environment do
+    require './env'
+  end
+end
+
 namespace :db do
   
   desc 'Environment'
   task :environment do
     require 'sequel'
-    DB = Sequel.connect "#{ENV['DATABASE_URL']}-#{ENV['RACK_ENV']}"
+    DB = Sequel.connect ENV['DATABASE_URL']
   end
   
   desc 'Seed database'

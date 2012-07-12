@@ -1,4 +1,4 @@
-DB = Sequel.connect "#{ENV['DATABASE_URL']}-#{ENV['RACK_ENV']}"
+DB = Sequel.connect ENV['DATABASE_URL']
 DB.optimize_model_load = true
 
 Sequel.instance_eval do
