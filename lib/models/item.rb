@@ -7,8 +7,8 @@ class Item < Sequel::Model
   plugin :association_pks
   plugin :touch
   
-  many_to_many :keywords, after_add: :touch_timestamp, after_remove: :touch_timestamp
-  many_to_many :authors, class: User, after_add: :touch_timestamp, after_remove: :touch_timestamp
+  many_to_many :keywords, after_add: :after_change, after_remove: :after_change
+  many_to_many :authors, class: User, right_key: :user_id
   
   one_to_one :asset
   
@@ -26,7 +26,8 @@ class Item < Sequel::Model
     full_text_search([:title,:description], query.split.map {|q| "#{q}:*"})
   end
   
-  def touch_timestamp
+  def after_change *args
     touch
   end
+  
 end
