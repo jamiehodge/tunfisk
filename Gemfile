@@ -6,6 +6,10 @@ gem 'sequel_postgresql_triggers'
 
 gem 'net-ldap'
 
+gem 'queue_classic'
+gem 'streamio-ffmpeg', github: 'streamio/streamio-ffmpeg'
+gem 'pony'
+
 group :development do
   gem 'foreman'
   gem 'guard'
