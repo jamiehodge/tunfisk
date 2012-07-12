@@ -17,19 +17,24 @@ module Job
   
     def perform
       screen = @transcoder.new(@input).screenshot
-      File.open screen.path, 'r' do |f|
-        Asset[@asset_id].add_proxy tempfile: f, type: 'image/png'
+      DB.transaction do
+        Asset[@asset_id].add_proxy name: File.basename(screen), type: 'image/png', size: screen.size
+        ProxyStore[@asset_id] << screen.path
       end
       
       mp4 = @transcoder.new(@input).transcode :mp4
-      File.open mp4.path, 'r' do |f|
-        Asset[@asset_id].add_proxy tempfile: f, type: 'video/mp4'
+      DB.transaction do
+        Asset[@asset_id].add_proxy name: File.basename(mp4), type: 'video/mp4', size: mp4.size
+        ProxyStore[@asset_id] << mp4.path
       end
       
       webm = @transcoder.new(@input).transcode :webm
-      File.open webm.path, 'r' do |f|
-        Asset[@asset_id].add_proxy tempfile: f, type: 'video/webm'
+      DB.transaction do
+        Asset[@asset_id].add_proxy name: File.basename(webm), type: 'video/webm', size: webm.size
+        ProxyStore[@asset_id] << webm.path
       end
     end
+    
   end
+  
 end
