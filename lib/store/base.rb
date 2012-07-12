@@ -2,6 +2,8 @@ module Store
   class Base
     include Enumerable
     
+    attr_reader :path
+    
     def self.create path
       new path if FileUtils.mkdir_p path
     end
@@ -11,19 +13,23 @@ module Store
     end
     
     def << id
-      Bin.create File.join(@path, id.to_s)
+      Bin.create self, id
     end
     
     def [] id
-      Bin.new File.join(@path, id.to_s)
+      Bin.new self, id
     end
     
     def each &block
-      Dir.glob("#{@path}/*").collect { |path| Bin.new File.join(@path, path) }.each(&block)
+      Dir.glob("#{@path}/*").collect { |path| Bin.new self, File.basename(path) }.each(&block)
     end
     
     def destroy
       FileUtils.rm_rf @path
+    end
+    
+    def to_s
+      path
     end
     
   end

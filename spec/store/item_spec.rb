@@ -22,15 +22,27 @@ describe Store::Item do
     'hello, world'
   end
   
+  def bin_id
+    '123'
+  end
+  
+  let :base do
+    Store::Base.new '/path/to/base'
+  end
+  
+  let :bin do
+    Store::Bin.new base, bin_id
+  end
+  
   def item_path
-    '/path/to/item'
+    File.join bin.path, filename
+  end
+  
+  before do
+    FileUtils.mkdir_p '/path/to'
   end
   
   describe 'class methods' do
-    
-    before do
-      FileUtils.mkdir_p '/path/to'
-    end
     
     describe 'create' do
       
@@ -39,7 +51,7 @@ describe Store::Item do
       end
       
       it 'creates a new item with a given file' do
-        Store::Item.create file_path, item_path
+        Store::Item.create bin, file_path
         File.file?(item_path).must_equal true
       end
       
@@ -50,7 +62,7 @@ describe Store::Item do
   describe 'instance methods' do
     
     let :item do
-      Store::Item.create file_path, item_path
+      Store::Item.create bin, file_path
     end
     
     describe '<<' do

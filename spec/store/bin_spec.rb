@@ -10,8 +10,16 @@ describe Store::Bin do
     FakeFS.deactivate!
   end
   
+  let :base do
+    Store::Base.new '/path/to/base'
+  end
+  
+  def bin_id
+    '123'
+  end
+  
   def bin_path
-    '/path/to/bin'
+    File.join base.path, bin_id
   end
   
   def filename
@@ -22,12 +30,16 @@ describe Store::Bin do
     "/path/to/#{filename}"
   end
   
+  def item_path
+    File.join bin_path, filename
+  end
+  
   describe 'class methods' do
     
     describe 'create' do
       
       it 'creates a new base path' do
-        Store::Bin.create bin_path
+        Store::Bin.create base, bin_id
         File.directory?(bin_path).must_equal true
       end
       
@@ -38,7 +50,7 @@ describe Store::Bin do
   describe 'instance methods' do
     
     let :bin do
-      Store::Bin.create bin_path
+      Store::Bin.create base, bin_id
     end
     
     describe '<<' do
@@ -49,7 +61,7 @@ describe Store::Bin do
       
       it 'creates a given item path' do
         bin << file_path
-        File.file?("#{bin_path}/#{filename}").must_equal true
+        File.file?(item_path).must_equal true
       end
       
       it 'returns the created bin' do
@@ -70,6 +82,7 @@ describe Store::Bin do
       
       before do
         bin << file_path
+        bin.each.count.must_equal 1
       end
       
       it 'returns an enumerator of items' do
